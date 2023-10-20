@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactusController;
+use App\Http\Controllers\StateController;
 
 
 /*
@@ -25,6 +26,7 @@ Route::group([
     'middleware' => 'api'], function ($router) {
     Route::post('/login', [AuthController::class, 'login']);
     Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);   
@@ -32,6 +34,11 @@ Route::group([
     Route::controller(ContactusController::class)->group(function () {
         Route::post('/contact/store', 'store');
     });
+});
+
+Route::controller(StateController::class)->group(function () {
+    Route::get('/state/list', 'getState');
+    Route::get('/city/list', 'getCity');
 });
 
 

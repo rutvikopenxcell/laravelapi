@@ -13,7 +13,7 @@ class AuthController extends Controller
      * @return void
      */
     public function __construct() {
-        $this->middleware('auth:api', ['except' => ['login', 'register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register','volunteerRegister']]);
     }
     /**
      * Get a JWT via given credentials.
@@ -96,5 +96,9 @@ class AuthController extends Controller
             'expires_in' => auth()->factory()->getTTL() * 60,
             'user' => auth()->user()
         ]);
+    }
+
+    public function volunteerRegister(Request $request){
+
     }
 }
