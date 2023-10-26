@@ -38,7 +38,7 @@ Route::group([
 
 Route::controller(StateController::class)->group(function () {
     Route::get('/state/list', 'getState');
-    Route::get('/city/list', 'getCity');
+    Route::get('/city/list/{id}', 'getCity');
 });
 
 
