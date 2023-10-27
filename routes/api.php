@@ -23,14 +23,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group([
-    'middleware' => 'api'], function ($router) {
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);   
-    
+    'middleware' => 'api'
+], function ($router) {
+    Route::controller(AuthController::class)->group(function () {
+        Route::post('login', 'login');
+        Route::post('register', 'register');
+        Route::post('logout', 'logout');
+        Route::post('refresh', 'refresh');
+        Route::post('user-profile', 'user-profile');
+    });
     Route::controller(ContactusController::class)->group(function () {
         Route::post('/contact/store', 'store');
     });
@@ -40,6 +41,3 @@ Route::controller(StateController::class)->group(function () {
     Route::get('/state/list', 'getState');
     Route::get('/city/list/{id}', 'getCity');
 });
-
-
-

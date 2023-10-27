@@ -2,16 +2,29 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
-use Illuminate\Http\Request;
+use Auth;
+use JWTAuth;
+use Closure;
 
-class Authenticate extends Middleware
-{
-    /**
-     * Get the path the user should be redirected to when they are not authenticated.
-     */
-    protected function redirectTo(Request $request): ?string
-    {
-        return $request->expectsJson() ? null : route('login');
+class Authenticate {
+
+/**
+ * Handle an incoming request.
+ *
+ * @param  \Illuminate\Http\Request  $request
+ * @param  \Closure  $next
+ * @return mixed
+ */
+public function handle($request, Closure $next) {        
+    try {
+        $jwt = JWTAuth::parseToken()->authenticate();
+    } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+        $jwt = false;
     }
+    if (Auth::check() || $jwt) {
+        return $next($request);
+    } else {
+        return response('Unauthorized.', 401);
+    }
+}
 }
