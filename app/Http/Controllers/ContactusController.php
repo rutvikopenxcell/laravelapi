@@ -28,4 +28,7 @@ class ContactusController extends Controller
     public function contactDonation(){
         
     }
+    public function emailSubscription(Request $request){
+          
+    }
 }

@@ -17,11 +17,6 @@ use App\Http\Controllers\StateController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::group([
     'middleware' => 'api'
 ], function ($router) {
@@ -30,7 +25,7 @@ Route::group([
         Route::post('register', 'register');
         Route::post('logout', 'logout');
         Route::post('refresh', 'refresh');
-        Route::post('user-profile', 'user-profile');
+        Route::post('user-profile', 'userProfile');
     });
     Route::controller(ContactusController::class)->group(function () {
         Route::post('/contact/store', 'store');

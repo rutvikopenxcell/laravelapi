@@ -17,7 +17,7 @@ class StateController extends Controller
         ], 200);
     }
     public function getCity($id){
-        $city =  City::find($id);
+        $city =  City::where('state_id',$id)->get();
         return response()->json([
             'message' => 'list of all cities',
             'city' => $city
