@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactusController;
 use App\Http\Controllers\StateController;
+use App\Http\Controllers\VolunteerController;
 
 
 /*
@@ -30,9 +31,13 @@ Route::group([
     Route::controller(ContactusController::class)->group(function () {
         Route::post('/contact/store', 'store');
     });
+    Route::controller(VolunteerController::class)->group(function () {
+        Route::post('/volunteer/signup', 'join');
+    });
+    Route::controller(StateController::class)->group(function () {
+        Route::get('/state/list', 'getState');
+        Route::get('/city/list/{id}', 'getCity');
+    });
+    
 });
 
-Route::controller(StateController::class)->group(function () {
-    Route::get('/state/list', 'getState');
-    Route::get('/city/list/{id}', 'getCity');
-});

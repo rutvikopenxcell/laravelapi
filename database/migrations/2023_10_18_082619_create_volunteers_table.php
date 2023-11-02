@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('city');
             $table->string('pincode');
             $table->string('address1');
-            $table->string('address2');
+            $table->string('address2')->nullable();
             $table->enum('gender', ['male', 'female', 'other']);
             $table->timestamps();
         });
